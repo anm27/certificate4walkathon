@@ -1,0 +1,163 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,900;1,9..40,900&display=swap");
+
+/* Primary gradient hex probable: #13b3ef */
+
+body {
+  background-color: #130f40;
+  background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
+  color: #fff !important;
+}
+
+.font-pacifico {
+  font-family: "Pacifico", cursive;
+}
+
+.font-dm-sans {
+  font-family: "DM Sans", sans-serif;
+}
+
+.text-primary-color {
+  color: #00d2e8; /* Replace with your custom color code */
+}
+
+.bg-header {
+  display: inline-block;
+  margin: 0;
+  line-height: 1em;
+  /* background: linear-gradient(to right, #000 50%, #fff 50%); */
+  background: black;
+}
+
+.title-stroke {
+  color: white;
+  font-size: 35px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+/* .text-gradient-primary {
+  color: linear-gradient(180deg, #2694f7, #00d2e8);
+} */
+
+.text-gradient-primary {
+  background-image: linear-gradient(180deg, #2694f7, #00d2e8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-green {
+  background-image: linear-gradient(180deg, #1b8b00, #a2d240);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(180deg, #2694f7, #00d2e8);
+}
+
+.bg-gradient-green {
+  background-color: #1b8b00;
+  background-image: linear-gradient(314deg, #1b8b00 0%, #a2d240 74%);
+}
+
+/* Testimonal Styling */
+
+.testimonial .slick-arrow.slick-prev,
+.testimonial .slick-arrow.slick-next {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.testimonial {
+  display: flex;
+  justify-content: center;
+  /* background: linear-gradient(180deg, #2694f7, #00d2e8); */
+  width: 100%;
+  padding: 20px;
+  /* margin: 20px auto; */
+  /* border-radius: 50px; */
+  /* min-width: 80%;s */
+}
+.main {
+  padding: 20px 60px;
+}
+
+/* Cards */
+
+.Client-Card {
+  color: rgb(255, 249, 249) !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  text-align: center !important;
+}
+.avatar {
+  width: 120px !important;
+  height: 120px !important;
+  border: 3px solid #000;
+  padding: 3px;
+}
+.Name {
+  font-size: 20px;
+  font-weight: bolder;
+  color: #000;
+}
+.heading {
+  text-align: center;
+  font-family: "Roboto";
+  color: #000;
+  font-size: 40px;
+}
+.designation {
+  color: #000;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Slick Slider  */
+.slick-prev::before,
+.slick-next::before {
+  display: none;
+}
+.slick-slider {
+  padding: 25px !important;
+  border-radius: 50px !important;
+  /* box-shadow: 1px 3px 21px 9px #9e9d9d !important; */
+  min-width: auto;
+}
+
+/* Customization of Slider Navigations*/
+
+.ft-slick__dots--custom {
+  height: 8px;
+  width: 14px;
+  background-color: black;
+  border-radius: 4px;
+  position: relative;
+}
+
+.slick-dots li {
+  width: 20px;
+  height: 0px;
+  margin: 10px -10px;
+  transition: width 0.3s ease-in-out;
+}
+
+.slick-dots .slick-active .ft-slick__dots--custom {
+  width: 20px;
+  top: 0px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2694f7, #00d2e8);
+  margin-top: 26px;
+}
