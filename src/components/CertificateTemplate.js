@@ -13,7 +13,7 @@ const CertificateTemplate = ({ participantName }) => {
           alt="certificate"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <h2 className="text-gray-900 text-lg font-bold pb-7">
+          <h2 className="text-gray-900 text-lg font-bold pb-7 capitalize">
             {participantName}
           </h2>
         </div>
