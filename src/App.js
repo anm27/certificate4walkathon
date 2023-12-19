@@ -4,13 +4,6 @@ import html2canvas from "html2canvas";
 import CertificateTemplate from "./components/CertificateTemplate";
 import hidcoLogo from "./images/hidco-logo.png";
 
-// Dummy participant data
-// const dummyParticipantData = {
-//   9875437382: { participantName: "Shri Amarendra Nath Mishra" },
-//   9475502550: { participantName: "Shri Debasis Sen" },
-//   // Add more participants as needed
-// };
-
 const dummyParticipantData = [
   {
     Timestamp: "12/13/2023 11:01:19",
@@ -2513,35 +2506,64 @@ const dummyParticipantData = [
     SEX: "Male",
   },
 ];
+
 const App = () => {
   const [mobileNumber, setMobileNumber] = useState("");
+  const [isValidMobile, setValidMobile] = useState(true);
   const [participantName, setParticipantName] = useState("");
+  const [participantNotFound, setParticipantNotFound] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({
+    mobileNumber: "",
+  });
 
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
+  const validateMobileNumber = (mobileNumber) => {
+    const mobileNumberRegex = /^[6-9]\d{0,9}$/;
+    return mobileNumberRegex.test(mobileNumber);
+  };
 
-  //   // Simulate fetching participant data based on mobile number
-  //   const data = dummyParticipantData[mobileNumber];
+  const handleMobileNumberChange = (event) => {
+    const inputMobileNo = event.target.value;
 
-  //   if (data) {
-  //     setParticipantName(data.participantName);
+    // Ensure only digits are entered
+    if (!/^\d*$/.test(inputMobileNo)) {
+      return;
+    }
 
-  //     // Render the CertificateTemplate component and wait for it to be rendered
-  //     await new Promise((resolve) => setTimeout(resolve, 0));
+    // Limit the input to 10 characters
+    const truncatedMobileNo = inputMobileNo.slice(0, 10);
 
-  //     // Generate certificate image
-  //     const certificateImage = await generateCertificateImage();
+    // Validate the mobile number
+    const isValid = validateMobileNumber(truncatedMobileNo);
 
-  //     // Create a download link for the image
-  //     createDownloadLink(certificateImage);
-  //   } else {
-  //     console.error("Participant not found");
-  //     // Handle participant not found error
-  //   }
-  // };
+    // Ensure that the first digit is in the range [6, 9]
+    if (
+      truncatedMobileNo.length > 0 &&
+      (truncatedMobileNo[0] < "6" || truncatedMobileNo[0] > "9")
+    ) {
+      setValidMobile(false);
+    } else {
+      setValidMobile(isValid);
+    }
+
+    setMobileNumber(truncatedMobileNo);
+
+    // Clear error messages when the user starts typing a valid mobile number
+    if (isValid) {
+      setValidationErrors({});
+      setParticipantNotFound(false);
+    }
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    let errors = {};
+
+    if (!mobileNumber) {
+      errors.mobileNumber = "*Mobile number is required";
+    }
+
+    setValidationErrors(errors);
 
     // Simulate fetching participant data based on mobile number
     const data = dummyParticipantData.find(
@@ -2551,6 +2573,7 @@ const App = () => {
 
     if (data) {
       setParticipantName(data.Name);
+      setParticipantNotFound(false);
 
       // Render the CertificateTemplate component and wait for it to be rendered
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -2562,6 +2585,7 @@ const App = () => {
       createDownloadLink(certificateImage);
     } else {
       console.error("Participant not found");
+      setParticipantNotFound(true);
       // Handle participant not found error
     }
   };
@@ -2624,10 +2648,28 @@ const App = () => {
             <input
               type="text"
               value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-              className="mt-1 p-2 w-full rounded-md text-black border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"
+              // onChange={(e) => setMobileNumber(e.target.value)}
+              onChange={handleMobileNumberChange}
+              className={`mt-1 p-2 w-full rounded-md text-black border border-gray-300 focus:outline-none focus:ring focus:border-blue-500 ${
+                isValidMobile ? "" : "border-red-500"
+              }`}
             />
           </label>
+          {validationErrors.mobileNumber && (
+            <p className="-mt-5 text-red-500 text-center">
+              {validationErrors.mobileNumber}
+            </p>
+          )}
+          {!isValidMobile && (
+            <p className="text-red-500 text-sm mt-1 ml-2 text-center">
+              Invalid mobile number. First digit must be 6, 7, 8, or 9.
+            </p>
+          )}
+          {participantNotFound && (
+            <p className="text-red-500 mb-2">
+              Participant with entered mobile number not found!
+            </p>
+          )}
           <button
             type="submit"
             className="bg-gradient-primary text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-700"
