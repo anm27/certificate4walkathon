@@ -25,6 +25,18 @@ body {
   color: #00d2e8; /* Replace with your custom color code */
 }
 
+.c-cert-text {
+  color: #8a6242;
+}
+
+.text-cert {
+  font-size: 9px;
+}
+
+.text-cert-size {
+  font-size: 5px;
+}
+
 .bg-header {
   display: inline-block;
   margin: 0;

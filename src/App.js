@@ -2511,6 +2511,7 @@ const App = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [isValidMobile, setValidMobile] = useState(true);
   const [participantName, setParticipantName] = useState("");
+  const [participantAddress, setParticipantAddress] = useState("");
   const [participantNotFound, setParticipantNotFound] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     mobileNumber: "",
@@ -2573,6 +2574,7 @@ const App = () => {
 
     if (data) {
       setParticipantName(data.Name);
+      setParticipantAddress(data.Address);
       setParticipantNotFound(false);
 
       // Render the CertificateTemplate component and wait for it to be rendered
@@ -2689,7 +2691,10 @@ const App = () => {
 
             {/* Include your certificate template here and dynamically insert participantName */}
             <div className="bg-gray-100 rounded-md">
-              <CertificateTemplate participantName={participantName} />
+              <CertificateTemplate
+                participantName={participantName}
+                participantAddress={participantAddress}
+              />
             </div>
             {/* Provide a download link for the generated certificate */}
             <div id="download-container">
