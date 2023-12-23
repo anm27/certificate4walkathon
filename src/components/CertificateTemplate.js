@@ -3,10 +3,10 @@ import React from "react";
 import certificate from "../images/eco-park-run-certificate.png";
 
 const CertificateTemplate = ({ participantName, participantAddress }) => {
-  const truncatedAddress =
-    participantAddress.length > 30
-      ? participantAddress.substring(0, 33) + "..."
-      : participantAddress;
+  // const truncatedAddress =
+  //   participantAddress.length > 30
+  //     ? participantAddress.substring(0, 33) + "..."
+  //     : participantAddress;
   return (
     <div id="certificate">
       {/* Your certificate template HTML goes here */}
@@ -22,7 +22,7 @@ const CertificateTemplate = ({ participantName, participantAddress }) => {
           </h2>
         </div>
         <h2 className="absolute bottom-36 ml-20 pl-3 mb-1 c-cert-text text-cert-size font-semibold capitalize">
-          {truncatedAddress}
+          Kolkata
         </h2>
       </div>
     </div>
